@@ -318,3 +318,7 @@ python <path_to_python_script> <input_file_name> <output_file_name> <options[0]>
 The `<input_file_name>` and `<output_file_name>` arguments are the names of temporary files which are automatically created to pass data to and from the Python script. These temporary files are stored temporarily in the `tmp` directory.
 
 See `services/clustering/kmeans` for an example of a service calling a Python script.
+
+## License
+
+Apache 2.0
