@@ -1,0 +1,25 @@
+body {
+    background-color: darkgrey;
+    padding: 0px;
+    margin: 0px;
+}
+h1 {
+    font-family: Verdana;
+    font-weight: normal;
+}
+#mainContent {
+    font-family: Georgia;
+    width: 40%;
+    min-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    margin-bottom: 0px;
+    background-color: white;
+    /* height: 100%; */
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 10px;
+    padding-bottom: 30px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}

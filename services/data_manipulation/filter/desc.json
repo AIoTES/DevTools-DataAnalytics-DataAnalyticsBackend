@@ -1,0 +1,87 @@
+{
+    "inputSchema": {
+        "title": "Filter service input",
+        "description": "The input to the filter service.",
+        "type": "object",
+        "properties": {
+            "data": {
+                "type": "array",
+                "description": "The data to analyze, as an array of JSON objects.",
+                "items": {
+                    "type": "object",
+                    "description": "An input data record.",
+                    "properties": {}
+                }
+            },
+            "options": {
+                "type": "object",
+                "description": "Filter options",
+                "properties": {
+                    "range": {
+                        "type": "array",
+                        "description": "Range filters",
+                        "items": {
+                            "type": "object",
+                            "description": "The range filter options for a single attribute.",
+                            "properties": {
+                                "attribute": {
+                                    "type": "string",
+                                    "description": "The name of an attribute to filter by."
+                                },
+                                "min": {
+                                    "type": ["number", "string", "null"],
+                                    "description": "The minimum value (inclusive) for the specific attribute, or null if no minimum is specified."
+                                },
+                                "max": {
+                                    "type": ["number", "string", "null"],
+                                    "description": "The maximum value (inclusive) for the specific attribute, or null if no maximum is specified."
+                                }
+                            },
+                            "required": ["attribute", "min", "max"]
+                        }
+                    }
+                },
+                "required": []
+            }
+        },
+        "required": ["data", "options"]
+    },
+    "inputExample": {
+        "data": [
+            {"id": 1, "label": "A"},
+            {"id": 2, "label": "A"},
+            {"id": 3, "label": "B"},
+            {"id": 4, "label": "A"},
+            {"id": 5, "label": "C"},
+            {"id": 6, "label": "C"},
+            {"id": 7, "label": "D"},
+            {"id": 8, "label": "B"},
+            {"id": 9, "label": "A"},
+            {"id": 10, "label": "C"}
+        ],
+        "options": {
+            "range": [
+                {"attribute": "id", "min": 3, "max": 9}
+            ]
+        }
+    },
+    "outputSchema": {
+        "title": "Filter output",
+        "description": "The output of the count service.",
+        "type": "array",
+        "items": {
+            "type": "object",
+            "description": "An output data record.",
+            "properties": {}
+        }
+    },
+    "outputExample": [
+        {"id": 3, "label": "B"},
+        {"id": 4, "label": "A"},
+        {"id": 5, "label": "C"},
+        {"id": 6, "label": "C"},
+        {"id": 7, "label": "D"},
+        {"id": 8, "label": "B"},
+        {"id": 9, "label": "A"}
+    ]
+}

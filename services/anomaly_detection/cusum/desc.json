@@ -1,0 +1,157 @@
+{
+    "inputSchema": {
+        "title": "CUSUM input",
+        "description": "The input to the CUSUM service.",
+        "type": "object",
+        "properties": {
+            "data": {
+                "type": "array",
+                "description": "The data to analyze, as an array of JSON objects.",
+                "items": {
+                    "type": "object",
+                    "description": "An input data record.",
+                    "properties": {}
+                }
+            },
+            "options": {
+                "type": "object",
+                "description": "Service options.",
+                "properties": {
+                    "attributes": {
+                        "type": "array",
+                        "description": "The names of the attributes of the input data records to use as point coordinates.",
+                        "items": {
+                            "type": "string",
+                            "description": "The name of an attribute."
+                        }
+                    },
+                    "training_data_percentage": {
+                      "type": "number", 
+                      "description": "The percentage of the input dataset that will serve as the training dataset."
+                    },
+                    "threshold_factor": {
+                        "type": "integer",
+                        "description": "Factor used to calculate the threshold."
+                    }                                  
+                },
+                "required": ["attributes", "training_data_percentage", "threshold_factor"]
+            }
+        },
+        "required": ["data", "options"]
+    },
+    "inputExample": {
+        "data": [
+            {"value":13,"measurementDate":"04-05-2018"},
+            {"value":14,"measurementDate":"02-09-2018"},
+            {"value":13,"measurementDate":"03-08-2018"},
+            {"value":10,"measurementDate":"07-04-2018"},
+            {"value":17,"measurementDate":"01-07-2018"},
+            {"value":16,"measurementDate":"03-12-2018"},
+            {"value":11,"measurementDate":"02-10-2018"},
+            {"value":18,"measurementDate":"07-10-2018"},
+            {"value":19,"measurementDate":"05-12-2018"},
+            {"value":13,"measurementDate":"07-05-2018"}
+        ],
+        "options": {
+            "attributes": ["value"],
+            "training_data_percentage":0.2,
+            "threshold_factor":5
+        }
+    },
+    "outputSchema": {
+        "title": "CUSUM output",
+        "description": "The output of the CUSUM service.",
+        "type": "array",
+        "items": {
+            "type": "object",
+            "description": "A record of the input data, enhanced with an anomaly score and an anomaly label",
+            "properties": {
+                "highsum": {
+                    "type": "number", 
+                    "description": "The high sum score for the specific record."
+                },
+                "lowsum": {
+                    "type": "number",
+                    "description": "The low sum score for the specific record."
+                },
+				"anomalyLabel": {
+                    "type": "string",
+                    "description": "The anomaly label for the specific record. It can be either 'Normal', or 'Outlier'"
+                }
+            },
+            "required": ["highsum","lowsum","anomalyLabel"]
+        }
+    },
+    "outputExample": [
+        {
+            "value": 13,
+            "measurementDate": "04-05-2018",
+            "highsum": 0,
+            "lowsum": 0,
+            "anomalyLabel": "Normal"
+        },
+        {
+            "value": 14,
+            "measurementDate": "02-09-2018",
+            "highsum": 0,
+            "lowsum": 0,
+            "anomalyLabel": "Normal"
+        },
+        {
+            "value": 13,
+            "measurementDate": "03-08-2018",
+            "highsum": 0,
+            "lowsum": 0,
+            "anomalyLabel": "Normal"
+        },
+        {
+            "value": 10,
+            "measurementDate": "07-04-2018",
+            "highsum": 0,
+            "lowsum": -0.6715728752538097,
+            "anomalyLabel": "Normal"
+        },
+        {
+            "value": 17,
+            "measurementDate": "01-07-2018",
+            "highsum": 0.6715728752538097,
+            "lowsum": 0,
+            "anomalyLabel": "Normal"
+        },
+        {
+            "value": 16,
+            "measurementDate": "03-12-2018",
+            "highsum": 0.3431457505076181,
+            "lowsum": 0,
+            "anomalyLabel": "Normal"
+        },
+        {
+            "value": 11,
+            "measurementDate": "02-10-2018",
+            "highsum": 0,
+            "lowsum": 0,
+            "anomalyLabel": "Normal"
+        },
+        {
+            "value": 18,
+            "measurementDate": "07-10-2018",
+            "highsum": 1.6715728752538097,
+            "lowsum": 0,
+            "anomalyLabel": "Normal"
+        },
+        {
+            "value": 19,
+            "measurementDate": "05-12-2018",
+            "highsum": 4.3431457505076185,
+            "lowsum": 0,
+            "anomalyLabel": "Outlier"
+        },
+        {
+            "value": 13,
+            "measurementDate": "07-05-2018",
+            "highsum": 1.0147186257614265,
+            "lowsum": 0,
+            "anomalyLabel": "Normal"
+        }
+    ]
+}

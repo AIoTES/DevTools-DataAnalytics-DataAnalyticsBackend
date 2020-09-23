@@ -1,0 +1,161 @@
+{
+    "inputSchema": {
+        "title": "Hidden Markov Model, model estimation (supervised training)",
+        "description": "The input to the Hidden Markov Model train service.",
+        "type": "object",
+        "properties": {
+            "data": {
+                "type": "array",
+                "description": "The data the model will be fitted to, as an array of JSON objects.",
+                "items": {
+                    "type": "object",
+                    "description": "An input data record.",
+                    "properties": {}
+                }
+            },
+            "options": {
+                "type": "object",
+                "description": "Service options.",
+                "properties": {
+                    "observations": {
+                        "type": "array",
+                        "description": "The names of the attributes of the input data records to use as observations/measurements.",
+                        "items": {
+                            "type": "string",
+                            "description": "The name of an attribute."
+                        }
+                    },
+                    "state": {
+                        "type": "string",
+                        "description": "The name of the attribute of the input data records that corresponds to hidden state (supervision)"
+                    }
+                },
+                "required": ["observations", "state"]
+            }
+        },
+        "required": ["data", "options"]
+    },
+    "inputExample": {
+        "data": [
+            {
+                "occupants_number": 2.0, 
+                "fire_count_n2": 0.0,
+                "fire_duration_n2": 0.0,
+                "fire_ratio_n2": 0.0,
+                "fire_count_n4": 1.0,
+                "fire_duration_n4": 240.0,
+                "fire_ratio_n4": 240.0,
+                "fire_count_n5": 0.0,
+                "fire_duration_n5": 0.0,
+                "fire_ratio_n5": 0.0
+            },
+            {
+                "occupants_number": 2.0,
+                "fire_count_n2": 0.0,
+                "fire_duration_n2": 0.0,
+                "fire_ratio_n2": 0.0,
+                "fire_count_n4": 0.0,
+                "fire_duration_n4": 0.0,
+                "fire_ratio_n4": 0.0,
+                "fire_count_n5": 0.0,
+                "fire_duration_n5": 0.0,
+                "fire_ratio_n5": 0.0
+            },
+            {
+                "occupants_number": 2.0,
+                "fire_count_n2": 0.0,
+                "fire_duration_n2": 0.0,
+                "fire_ratio_n2": 0.0,
+                "fire_count_n4": 1.0,
+                "fire_duration_n4": 17.0,
+                "fire_ratio_n4": 17.0,
+                "fire_count_n5": 1.0,
+                "fire_duration_n5": 20.0,
+                "fire_ratio_n5": 20.0
+            },
+            {
+                "occupants_number": 2.0,
+                "fire_count_n2": 0.0,
+                "fire_duration_n2": 0.0,
+                "fire_ratio_n2": 0.0,
+                "fire_count_n4": 0.0,
+                "fire_duration_n4": 600.0,
+                "fire_ratio_n4": 600.0,
+                "fire_count_n5": 0.0,
+                "fire_duration_n5": 440.0,
+                "fire_ratio_n5": 440.0
+            },
+            {
+                "occupants_number": 2.0,
+                "fire_count_n2": 0.0,
+                "fire_duration_n2": 0.0,
+                "fire_ratio_n2": 0.0,
+                "fire_count_n4": 0.0,
+                "fire_duration_n4": 244.0,
+                "fire_ratio_n4": 244.0,
+                "fire_count_n5": 0.0,
+                "fire_duration_n5": 0.0,
+                "fire_ratio_n5": 0.0
+            },
+            {
+                "occupants_number": 2.0,
+                "fire_count_n2": 2.0,
+                "fire_duration_n2": 25.0,
+                "fire_ratio_n2": 12.5,
+                "fire_count_n4": 1.0,
+                "fire_duration_n4": 494.0,
+                "fire_ratio_n4": 494.0,
+                "fire_count_n5": 1.0,
+                "fire_duration_n5": 87.0,
+                "fire_ratio_n5": 87.0
+            }
+        ],
+        "options": {
+            "state": "occupants_number",
+            "observations": [
+                "fire_count_n2",
+                "fire_duration_n2",
+                "fire_ratio_n2",
+                "fire_count_n4",
+                "fire_duration_n4",
+                "fire_ratio_n4",
+                "fire_count_n5",
+                "fire_duration_n5",
+                "fire_ratio_n5"
+            ]
+        }
+    },
+    "outputSchema": {
+        "title": "Hidden Markov Model train service output",
+        "description": "The output of the Hidden Markov Model train service.",
+        "type": "object",
+        "properties": {
+            "model": {
+                "type": "string",
+                "description": "Serialized Hidden Markov model in pickle format."
+            },
+            "observationsOrder": {
+                "type": "array",
+                "description": "The names of the attributes of the input data records to use as observations/measurements, is specific order.",
+                "items": {
+                    "type": "string",
+                    "description": "The name of an attribute."
+                }
+            }                    
+        }
+    },
+    "outputExample": {
+        "model":"gANC5xUAAIADY2htbWxlYXJuLmhtbQpHTU1ITU0KcQApgXEBfXECKFgMAAAAbl9jb21wb25lbnRz\ncQNLAVgGAAAAcGFyYW1zcQRYBQAAAHN0bWN3cQVYCwAAAGluaXRfcGFyYW1zcQZoBVgPAAAAc3Rh\ncnRwcm9iX3ByaW9ycQdHP/AAAAAAAABYDgAAAHRyYW5zbWF0X3ByaW9ycQhHP/AAAAAAAABYCQAA\nAGFsZ29yaXRobXEJWAcAAAB2aXRlcmJpcQpYDAAAAHJhbmRvbV9zdGF0ZXELSwJYBgAAAG5faXRl\ncnEMSwpYAwAAAHRvbHENRz+EeuFHrhR7WAcAAAB2ZXJib3NlcQ6JWAgAAABtb25pdG9yX3EPY2ht\nbWxlYXJuLmJhc2UKQ29udmVyZ2VuY2VNb25pdG9yCnEQKYFxEX1xEihoDUc/hHrhR64Ue2gMSwpo\nDolYBwAAAGhpc3RvcnlxE2Njb2xsZWN0aW9ucwpkZXF1ZQpxFClLAoZxFVJxFlgEAAAAaXRlcnEX\nSwB1YlgPAAAAY292YXJpYW5jZV90eXBlcRhYBAAAAGZ1bGxxGVgJAAAAbWluX2NvdmFycRpHP1Bi\nTdLxqfxYBQAAAG5fbWl4cRtLA1gNAAAAd2VpZ2h0c19wcmlvcnEcY251bXB5LmNvcmUubXVsdGlh\ncnJheQpfcmVjb25zdHJ1Y3QKcR1jbnVtcHkKbmRhcnJheQpxHksAhXEfQwFicSCHcSFScSIoSwFL\nAUsDhnEjY251bXB5CmR0eXBlCnEkWAIAAABmOHElSwBLAYdxJlJxJyhLA1gBAAAAPHEoTk5OSv//\n//9K/////0sAdHEpYolDGAAAAAAAAPA/AAAAAAAA8D8AAAAAAADwP3EqdHErYlgLAAAAbWVhbnNf\ncHJpb3JxLGgdaB5LAIVxLWggh3EuUnEvKEsBSwFLA0sJh3EwaCeJQ9gAAAAAAAAAAAAAAAAAAAAA\nAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\nAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\nAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\nAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABxMXRxMmJYDAAAAG1lYW5zX3dlaWdodHEzaB1o\nHksAhXE0aCCHcTVScTYoSwFLAUsDhnE3aCeJQxgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABxOHRx\nOWJYDAAAAGNvdmFyc19wcmlvcnE6aB1oHksAhXE7aCCHcTxScT0oSwEoSwFLA0sJSwl0cT5oJ4lC\nmAcAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\nAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\nAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\nAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\nAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\nAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\nAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\nAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\nAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\nAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\nAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\nAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\nAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\nAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\nAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\nAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\nAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\nAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\nAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\nAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\nAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\nAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\nAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\nAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\nAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\nAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\nAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\nAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\nAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\nAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\nAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\nAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\nAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\nAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\nAAAAAAAAAAAAAHE/dHFAYlgNAAAAY292YXJzX3dlaWdodHFBaB1oHksAhXFCaCCHcUNScUQoSwFL\nAUsDhnFFaCeJQxgAAAAAAAAmwAAAAAAAACbAAAAAAAAAJsBxRnRxR2JYCgAAAHN0YXJ0cHJvYl9x\nSGgdaB5LAIVxSWggh3FKUnFLKEsBSwGFcUxoJ4lDCAAAAAAAAPA/cU10cU5iWAkAAAB0cmFuc21h\ndF9xT2gdaB5LAIVxUGggh3FRUnFSKEsBSwFLAYZxU2gniUMIAAAAAAAA8D9xVHRxVWJYCgAAAG5f\nZmVhdHVyZXNxVksJWAgAAAB3ZWlnaHRzX3FXaB1oHksAhXFYaCCHcVlScVooSwFLAUsDhnFbaCeJ\nQxhYVVVVVVXlP2NVVVVVVcU/Y1VVVVVVxT9xXHRxXWJYBgAAAG1lYW5zX3FeaB1oHksAhXFfaCCH\ncWBScWEoSwFLAUsDSwmHcWJoJ4lD2AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPz//////98//P//\n//9PX0D8/////09fQPz//////88//v//////E0D+//////8TQOz///////8/8P//////OEDw////\n//8oQOz//////+8/7f/////ffkDt/////99+QOz//////+8/8v////+/VUDy/////79VQAAAAAAA\nAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA9P////+/gkD0/////7+CQAAAAAAAAAAA7/////9/\ne0Dv/////397QHFjdHFkYlgHAAAAY292YXJzX3FlaB1oHksAhXFmaCCHcWdScWgoSwEoSwFLA0sJ\nSwl0cWloJ4lCmAcAAPFo44i1+OQ+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\nAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8WjjiLX45D4AAAAAAAAAAAAAAAAA\nAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\nAADxaOOItfjkPgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\nAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMURa/EpANA/+///////+T/7///////5P/z//////78/\n/v//////A0D+//////8DQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPv///////k/0+JTAFiyykD9\n////V7LKQP3/////DzvA/v/////pgMD+/////+mAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPv/\n//////k//f///1eyykDT4lMAWLLKQP3/////DzvA/v/////pgMD+/////+mAwAAAAAAAAAAAAAAA\nAAAAAAAAAAAAAAAAAPz//////78//f////8PO8D9/////w87wIwj1uJTAMg//P//////DUD8////\n//8NQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP7//////wNA/v/////pgMD+/////+mAwPz/////\n/w1AEGvxKQDAUkD+/////79SQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP7//////wNA/v/////p\ngMD+/////+mAwPz//////w1A/v////+/UkAQa/EpAMBSQPFo44i1+OQ+9P//////Mzr0//////8j\nOvD//////+g58f////+/dzrx/////793OvD//////+g59f////9/UTr1/////39ROvT//////zM6\n8WjjiLX45D7s//////9fOvT//////yM69P//////sjr0//////+yOvT//////yM67///////izrv\n//////+LOvT//////yM67P//////XzrxaOOItfjkPvT//////xM69P//////ojr0//////+iOvT/\n/////xM67///////ezrv//////97OvD//////+g59P//////Izr0//////8TOvFo44i1+OQ+8f//\n//+/Zzrx/////79nOvD//////9g59f////9/QTr1/////39BOvH/////v3c69P//////sjr0////\n//+iOvH/////v2c68WjjiLX45D7y/////4/2OvH/////v2c69v////+f0Dr2/////5/QOvH/////\nv3c69P//////sjr0//////+iOvH/////v2c68v////+P9jrxaOOItfjkPvH/////v2c69v////+f\n0Dr2/////5/QOvD//////+g59P//////Izr0//////8TOvD//////9g58f////+/Zzrx/////79n\nOvFo44i1+OQ+9f////9/QTr1/////39BOvX/////f1E67///////izrv//////97OvX/////f0E6\n9v////+f0Dr2/////5/QOvX/////f0E68WjjiLX45D7x/////3+oOvX/////f1E67///////izrv\n//////97OvX/////f0E69v////+f0Dr2/////5/QOvX/////f0E68f////9/qDrxaOOItfjkPvFo\n44i1+OQ+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\nAAAAAAAAAAAAAAAAAAAAAAAAAAAA8WjjiLX45D4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\nAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADxaOOItfjkPgAAAAAA\nAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\nAAAAAAAAAAAAAPFo44i1+OQ+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\nAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8WjjiLX45D71//////8BOwAAAAAAAAAA\n8P////9/+Trw/////3/5OgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA9f//////ATvx\naOOItfjkPgAAAAAAAAAA8P////9/+Trw/////3/5OgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\nAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPFo44i1+OQ+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\nAAAAAAAAAAAAAAAAAAAAAAAAAAAA8P////9/+Trw/////3/5OgAAAAAAAAAA8WjjiLX45D71////\n/w/yOgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8P////9/+Trw/////3/5OgAAAAAA\nAAAA9f////8P8jrxaOOItfjkPnFqdHFrYnViLnEALg==\n",
+        "observationsOrder":[
+            "fire_count_n2",
+            "fire_duration_n2",
+            "fire_ratio_n2",
+            "fire_count_n4",
+            "fire_duration_n4",
+            "fire_ratio_n4",
+            "fire_count_n5",
+            "fire_duration_n5",
+            "fire_ratio_n5"
+            ]
+    }
+}

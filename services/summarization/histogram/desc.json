@@ -1,0 +1,91 @@
+{
+    "inputSchema": {
+        "title": "Histogram input",
+        "description": "The input to the histogram service.",
+        "type": "object",
+        "properties": {
+            "data": {
+                "type": "array",
+                "description": "The data to analyze, as an array of JSON objects.",
+                "items": {
+                    "type": "object",
+                    "description": "An input data record.",
+                    "properties": {}
+                }
+            },
+            "options": {
+                "type": "object",
+                "description": "Service options.",
+                "properties": {
+                    "attribute": {
+                        "type": "string",
+                        "description": "The name of an attribute of the input data records. Only the values of this attribute will be used for analysis."
+                    },
+                    "domain": {
+                        "type": "array",
+                        "description": "The [min, max] limits of the range in which the specific attribute takes values.",
+                        "minItems": 2,
+                        "maxItems": 2,
+                        "items": {
+                            "type": "number",
+                            "description": "The min or max limit of the attribute domain."
+                        }
+                    },
+                    "bins": {
+                        "type": "integer",
+                        "description": "The number of bins in which to split the attribute's domain for the histogram."
+                    }
+                },
+                "required": ["attribute", "domain", "bins"]
+            }
+        },
+        "required": ["data", "options"]
+    },
+    "inputExample": {
+        "data": [
+            {"id": "1", "value": 3},
+            {"id": "2", "value": 2},
+            {"id": "3", "value": 5},
+            {"id": "4", "value": 4},
+            {"id": "5", "value": 2},
+            {"id": "6", "value": 2},
+            {"id": "7", "value": 6},
+            {"id": "8", "value": 8},
+            {"id": "9", "value": 1},
+            {"id": "10", "value": 3}
+        ],
+        "options": {
+            "attribute": "value",
+            "domain": [0, 10],
+            "bins": 2
+        }
+    },
+    "outputSchema": {
+        "title": "Histogram output",
+        "description": "The output of the histogram service.",
+        "type": "array",
+        "items": {
+            "type": "object",
+            "description": "The histogram value for a specific bin.",
+            "properties": {
+                "label": {
+                    "type": "string",
+                    "description": "The lower limit of the specific bin."
+                },
+                "value": {
+                    "type": "integer",
+                    "description": "The number of appearances of the specific attribute value within the specific bin in the input data."
+                }
+            },
+            "required": ["label", "value"]
+        }
+    },
+    "outputExample": [
+        {"label":"[0, 5)","value":7},
+        {"label":"[5, 10)","value":3}
+    ],
+    "outputExampleOld":[
+        {"label": 0, "value": 7},
+        {"label": 5, "value": 3}
+    ]
+}

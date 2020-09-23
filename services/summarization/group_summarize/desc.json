@@ -1,0 +1,107 @@
+{
+    "inputSchema": {
+        "title": "Group summarize input",
+        "description": "The input to the group summarize service.",
+        "type": "object",
+        "properties": {
+            "data": {
+                "type": "array",
+                "description": "The data to analyze, as an array of JSON objects.",
+                "items": {
+                    "type": "object",
+                    "description": "An input data record.",
+                    "properties": {}
+                }
+            },
+            "options": {
+                "type": "object",
+                "description": "Service options.",
+                "properties": {
+                    "groupAttr": {
+                        "type": "string",
+                        "description": "The name of the attribute of the input data records to use for data grouping."
+                    },
+                    "groupAttr2": {
+                        "type": "string",
+                        "description": "The name of a second attribute of the input data records to use for a 2nd level of grouping."
+                    },
+                    "valueAttr": {
+                        "type": "string",
+                        "description": "The name of the attribute to summarize."
+                    },
+                    "summaryFunction": {
+                        "type": "string",
+                        "description": "The name of the summarization function to use. Available options: 'count', 'sum', 'mean'"
+                    },
+                    "reshape": {
+                        "type": "boolean",
+                        "description": "Wheather to reshape the output data (only for 2nd level grouping)."
+                    },
+                    "sort": {
+                        "type": "string",
+                        "description": "How to sort the returned values (ascending, descending, none)."
+                    }
+                },
+                "required": ["groupAttr", "valueAttr", "summaryFunction"]
+            }
+        },
+        "required": ["data", "options"]
+    },
+    "inputExample": {
+        "data": [
+            {"id": "1", "label": "A", "value": 25.3},
+            {"id": "2", "label": "A", "value": 12.5},
+            {"id": "3", "label": "B", "value": 11.5},
+            {"id": "4", "label": "A", "value": 28.7},
+            {"id": "5", "label": "C", "value": 35.1},
+            {"id": "6", "label": "C", "value": 12.8},
+            {"id": "7", "label": "D", "value": 7.2},
+            {"id": "8", "label": "B", "value": 5.9},
+            {"id": "9", "label": "A", "value": 18.9},
+            {"id": "10", "label": "C", "value": 22.0}
+        ],
+        "options": {
+            "groupAttr": "label",
+            "valueAttr": "value",
+            "summaryFunction": "mean"
+        }
+    },
+    "outputSchema": {
+        "title": "Count output",
+        "description": "The output of the group summarization service.",
+        "type": "array",
+        "items": {
+            "type": "object",
+            "description": "The summarization result for a specific group attribute value.",
+            "properties": {
+                "key": {
+                    "type": "string",
+                    "description": "The key of each group."
+                },
+                "value": {
+                    "type": "number",
+                    "description": "The summarized value for each group."
+                }
+            },
+            "required": ["key", "value"]
+        }
+    },
+    "outputExample": [
+        {
+            "key": "A",
+            "value": 21.35
+        },
+        {
+            "key": "B",
+            "value": 8.7
+        },
+        {
+            "key": "C",
+            "value": 23.3
+        },
+        {
+            "key": "D",
+            "value": 7.2
+        }
+    ]
+}

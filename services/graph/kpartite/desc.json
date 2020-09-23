@@ -1,0 +1,186 @@
+{
+    "inputSchema": {
+        "title": "K-partite graph service input",
+        "description": "The input to the k-partite graphs service.",
+        "type": "object",
+        "properties": {
+            "data": {
+                "type": "array",
+                "description": "The data to analyze, as an array of JSON objects.",
+                "items": {
+                    "type": "object",
+                    "description": "An input data record.",
+                    "properties": {}
+                }
+            },
+            "options": {
+                "type": "object",
+                "description": "Service options.",
+                "properties": {
+                    "attributes": {
+                        "type": "array",
+                        "description": "The names of the attributes of the input data records to use.",
+                        "items": {
+                            "type": "string",
+                            "description": "The name of an attribute."
+                        }
+                    }
+                },
+                "required": ["attributes"]
+            }
+        },
+        "required": [
+            "data",
+            "options"
+        ]
+    },
+    "inputExample": {
+        "data": [
+            {
+                "userId": "15987997",
+                "city": "Kozani",
+                "retrievedCity": "New York"
+            },
+            {
+                "userId": "171249307",
+                "city": "New York",
+                "retrievedCity": "Toronto"
+            },
+            {
+                "userId": "1597526532",
+                "city": "New York",
+                "retrievedCity": "Toronto"
+            },
+            {
+                "userId": "1869232392",
+                "city": "London",
+                "retrievedCity": "Toronto"
+            },
+            {
+                "userId": "851590080",
+                "city": "New York",
+                "retrievedCity": "Toronto"
+            },
+            {
+                "userId": "1041443594",
+                "city": "London",
+                "retrievedCity": "New York"
+            },
+            {
+                "userId": "2372652763",
+                "city": "New York",
+                "retrievedCity": "Toronto"
+            },
+            {
+                "userId": "289661104",
+                "city": "New York",
+                "retrievedCity": "Toronto"
+            },
+            {
+                "userId": "1557205512",
+                "city": "New York",
+                "retrievedCity": "Toronto"
+            },
+            {
+                "userId": "3256786222",
+                "city": "Madrid",
+                "retrievedCity": "New York"
+            }
+        ],
+        "options": {
+            "attributes": ["city", "retrievedCity"]
+        }
+    },
+    "outputSchema": {
+        "title": "K-partite service output",
+        "description": "The output of the k-partite graphs service.",
+        "type": "object",
+        "properties": {
+            "nodes": {
+                "type": "array",
+                "description": "The graph nodes",
+                "items": {
+                    "type": "object",
+                    "description": "A graph node",
+                    "properties": {
+                        "id": {
+                            "type": "integer",
+                            "description": "A unique node ID."
+                        },
+                        "type": {
+                            "type": "string",
+                            "description": "The node type (column name)."
+                        },
+                        "value": {
+                            "type": "any",
+                            "description": "The node value."
+                        }
+                    }
+                }
+            },
+            "edges": {
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "description": "An edge of the graph.",
+                    "properties": {
+                        "source": {
+                            "type": "integer",
+                            "description": "The ID of the source node."
+                        },
+                        "target": {
+                            "type": "integer",
+                            "description": "The ID of the target node."
+                        }
+                    },
+                    "required": [
+                        "source",
+                        "target"
+                    ]
+                }
+            }
+        }
+    },
+    "outputExample": {
+        "nodes":[
+            {"id":0,"type":"rowId","value":0,"degree":2},
+            {"id":1,"type":"rowId","value":1,"degree":2},
+            {"id":2,"type":"rowId","value":2,"degree":2},
+            {"id":3,"type":"rowId","value":3,"degree":2},
+            {"id":4,"type":"rowId","value":4,"degree":2},
+            {"id":5,"type":"rowId","value":5,"degree":2},
+            {"id":6,"type":"rowId","value":6,"degree":2},
+            {"id":7,"type":"rowId","value":7,"degree":2},
+            {"id":8,"type":"rowId","value":8,"degree":2},
+            {"id":9,"type":"rowId","value":9,"degree":2},
+            {"id":10,"type":"city","value":"Kozani","degree":1},
+            {"id":11,"type":"city","value":"New York","degree":6},
+            {"id":12,"type":"city","value":"London","degree":2},
+            {"id":13,"type":"city","value":"Madrid","degree":1},
+            {"id":14,"type":"retrievedCity","value":"New York","degree":3},
+            {"id":15,"type":"retrievedCity","value":"Toronto","degree":7}
+        ],
+        "edges":[
+            {"source":0,"target":10},
+            {"source":0,"target":14},
+            {"source":1,"target":11},
+            {"source":1,"target":15},
+            {"source":2,"target":11},
+            {"source":2,"target":15},
+            {"source":3,"target":12},
+            {"source":3,"target":15},
+            {"source":4,"target":11},
+            {"source":4,"target":15},
+            {"source":5,"target":12},
+            {"source":5,"target":14},
+            {"source":6,"target":11},
+            {"source":6,"target":15},
+            {"source":7,"target":11},
+            {"source":7,"target":15},
+            {"source":8,"target":11},
+            {"source":8,"target":15},
+            {"source":9,"target":13},
+            {"source":9,"target":14}
+            ]
+    }
+}

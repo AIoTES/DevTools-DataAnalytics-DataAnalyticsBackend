@@ -1,0 +1,73 @@
+{
+    "inputSchema": {
+        "title": "Count input",
+        "description": "The input to the count service.",
+        "type": "object",
+        "properties": {
+            "data": {
+                "type": "array",
+                "description": "The data to analyze, as an array of JSON objects.",
+                "items": {
+                    "type": "object",
+                    "description": "An input data record.",
+                    "properties": {}
+                }
+            },
+            "options": {
+                "type": "object",
+                "description": "Service options.",
+                "properties": {
+                    "attribute": {
+                        "type": "string",
+                        "description": "The name of an attribute of the input data records. Only the values of this attribute will be used for analysis."
+                    },
+                    "sort": {
+                        "type": "string",
+                        "description": "How to sort the returned values (ascending, descending, none)."
+                    }
+                },
+                "required": ["attribute"]
+            }
+        },
+        "required": ["data", "options"]
+    },
+    "inputExample": {
+        "data": [
+            {"id": "1", "label": "A"},
+            {"id": "2", "label": "A"},
+            {"id": "3", "label": "B"},
+            {"id": "4", "label": "A"},
+            {"id": "5", "label": "C"},
+            {"id": "6", "label": "C"},
+            {"id": "7", "label": "D"},
+            {"id": "8", "label": "B"},
+            {"id": "9", "label": "A"},
+            {"id": "10", "label": "C"}
+        ],
+        "options": {
+            "attribute": "label"
+        }
+    },
+    "outputSchema": {
+        "title": "Count output",
+        "description": "The output of the count service.",
+        "type": "array",
+        "items": {
+            "type": "object",
+            "description": "The count result for a specific attribute value.",
+            "properties": {
+                "count": {
+                    "type": "integer",
+                    "description": "The number of appearances of a specific attribute value in the input data."
+                }
+            },
+            "required": ["count"]
+        }
+    },
+    "outputExample": [
+        {"label":"A","count":4},
+        {"label":"B","count":2},
+        {"label":"C","count":3},
+        {"label":"D","count":1}
+    ]
+}

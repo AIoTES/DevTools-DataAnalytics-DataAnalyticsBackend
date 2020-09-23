@@ -1,0 +1,38 @@
+[
+	{"name": "loadurl", "path": "./services/data_loading/loadurl"},
+
+	{"name": "filter", "path": "./services/data_manipulation/filter"},
+	{"name": "mutate", "path": "./services/data_manipulation/mutate"},
+	
+	{"name": "summary", "path": "./services/summarization/summary"},
+	{"name": "count", "path": "./services/summarization/count"},
+	{"name": "histogram", "path": "./services/summarization/histogram"},
+	{"name": "group_summarize", "path": "./services/summarization/group_summarize"},
+
+	{"name": "mds", "path": "./services/dimensionality_reduction/mds"},
+
+	{"name": "kmeans", "path": "./services/clustering/kmeans"},
+
+	{"name": "arima", "path": "./services/prediction/arima"},
+	{"name": "starima", "path": "./services/prediction/starima"},
+	{"name": "arimatrain", "path": "./services/prediction/arimatrain"},
+	{"name": "arimapredict", "path": "./services/prediction/arimapredict"},
+
+	{"name": "lof", "path": "./services/anomaly_detection/lof"},
+	{"name": "cusum", "path": "./services/anomaly_detection/cusum"},
+	{"name": "baseline", "path": "./services/anomaly_detection/baseline"},
+
+	{"name": "distmat", "path": "./services/pairwise/distmat"},
+
+	{"name": "mst", "path": "./services/graph/mst"},
+	{"name": "mergegraphs", "path": "./services/graph/mergegraphs"},
+	{"name": "kpartite", "path": "./services/graph/kpartite"},
+	{"name": "multiobjective", "path": "./services/graph/multiobjective"},
+
+	{"name": "autoencoder", "path": "./services/dimensionality_reduction/autoencoder"},
+	{"name": "autoencoder_encode", "path": "./services/dimensionality_reduction/autoencoder_encode"},
+
+	{"name": "hiddenmarkov_train", "path": "./services/prediction/hiddenmarkov_train"},
+	{"name": "hiddenmarkov_predict", "path": "./services/prediction/hiddenmarkov_predict"},
+	{"name": "dbscan", "path": "./services/clustering/dbscan"}
+]

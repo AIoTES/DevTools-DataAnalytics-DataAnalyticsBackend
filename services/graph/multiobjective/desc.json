@@ -1,0 +1,212 @@
+{
+    "inputSchema": {
+        "title": "Multi-objective graph input",
+        "description": "The input to the multi-objective graph service.",
+        "type": "object",
+        "properties": {
+            "data": {
+                "type": "array",
+                "description": "The data to analyze, as an array of JSON objects.",
+                "items": {
+                    "type": "object",
+                    "description": "An input data record.",
+                    "properties": {}
+                }
+            },
+            "options": {
+                "type": "object",
+                "description": "Service options.",
+                "properties": {
+                    "features": {
+                        "type": "array",
+                        "description": "The set of multiple features to use.",
+                        "items": {
+                            "type": "object",
+                            "description": "A feature specification.",
+                            "properties": {
+                                "attributes": {
+                                    "type": "array",
+                                    "description": "The names of the attributes of the input data records to use as a feature vector.",
+                                    "items": {
+                                        "type": "string",
+                                        "description": "The name of an attribute."
+                                    }
+                                },
+                                "distFun": {
+                                    "type": "string",
+                                    "description": "The pairwise distance metric to use. Accepted values: euclidean, l2, l1."
+                                }
+                            }
+                        }
+                    }
+                },
+                "required": ["features"]
+            }
+        },
+        "required": ["data", "options"]
+    },
+    "inputExample": {
+        "data": [
+            {"x": 20.3338847898911, "y": 70.9608018911035},
+            {"x": 26.5165713494385, "y": 46.4862383887838},
+            {"x": 22.5405564503676, "y": 68.9679382342013},
+            {"x": 29.9393973268233, "y": 43.4853462432036},
+            {"x": 13.05480068866, "y": 76.3221641119346},
+            {"x": 25.2384254905452, "y": 68.9133633755761},
+            {"x": 23.1553508372478, "y": 60.8484183471996},
+            {"x": 34.7867591608082, "y": 62.374536303667},
+            {"x": 35.4109048886794, "y": 58.8987189980316},
+            {"x": 38.5175405140372, "y": 56.1424244109387},
+            {"x": 97.1865108432285, "y": 79.0764314181978},
+            {"x": 68.0550425292563, "y": 68.7145731834059},
+            {"x": 76.9587226195596, "y": 84.0134969582564},
+            {"x": 77.8924457763679, "y": 94.2337408933988},
+            {"x": 95.1270061424319, "y": 81.5486319091794},
+            {"x": 60.3422905089889, "y": 75.1475592989026},
+            {"x": 97.8872293428121, "y": 102.366600071028},
+            {"x": 75.6921793935179, "y": 82.1061642879839},
+            {"x": 90.3069726352579, "y": 75.0050125673137},
+            {"x": 85.812705720906, "y": 86.1304198438951}
+        ],
+        "options": {
+            "features": [
+                {
+                    "attributes": ["x", "y"],
+                    "distFun": "euclidean"
+                },
+                {
+                    "attributes": ["x"],
+                    "distFun": "l1"
+                }
+            ]
+        }
+    },
+    "outputSchema": {
+        "title": "Multi-objective graphs output",
+        "description": "The output of the multi-objective graph service.",
+        "type": "object",
+        "properties": {
+            "nodes": {
+                "type": "array",
+                "description": "The graph nodes",
+                "items": {
+                    "type": "object",
+                    "description": "A graph node"
+                }
+            },
+            "edges": {
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "description": "An edge of the graph.",
+                    "properties": {
+                        "source": {
+                            "type": "integer",
+                            "description": "The ID of the source node."
+                        },
+                        "target": {
+                            "type": "integer",
+                            "description": "The ID of the target node."
+                        }
+                    },
+                    "required": ["source", "target"]
+                }
+            }
+        }
+    },
+    "outputExample": {
+        "nodes":[
+            {"x":20.3338847898911,"y":70.9608018911035},
+            {"x":26.5165713494385,"y":46.4862383887838},
+            {"x":22.5405564503676,"y":68.9679382342013},
+            {"x":29.9393973268233,"y":43.4853462432036},
+            {"x":13.05480068866,"y":76.3221641119346},
+            {"x":25.2384254905452,"y":68.9133633755761},
+            {"x":23.1553508372478,"y":60.8484183471996},
+            {"x":34.7867591608082,"y":62.374536303667},
+            {"x":35.4109048886794,"y":58.8987189980316},
+            {"x":38.5175405140372,"y":56.1424244109387},
+            {"x":97.1865108432285,"y":79.0764314181978},
+            {"x":68.0550425292563,"y":68.7145731834059},
+            {"x":76.9587226195596,"y":84.0134969582564},
+            {"x":77.8924457763679,"y":94.2337408933988},
+            {"x":95.1270061424319,"y":81.5486319091794},
+            {"x":60.3422905089889,"y":75.1475592989026},
+            {"x":97.8872293428121,"y":102.366600071028},
+            {"x":75.6921793935179,"y":82.1061642879839},
+            {"x":90.3069726352579,"y":75.0050125673137},
+            {"x":85.812705720906,"y":86.1304198438951}
+        ],
+        "individual":[
+            [   {"source":2,"target":0,"value":0.05113091367677204},
+                {"source":5,"target":2,"value":0.06731171556616558},
+                {"source":6,"target":2,"value":0.0002908327657925086},
+                {"source":4,"target":0,"value":0.00011852054609592316},
+                {"source":7,"target":5,"value":0.000009419952041882645},
+                {"source":8,"target":7,"value":0.029263595039587705},
+                {"source":9,"target":8,"value":0.01571542351842038},
+                {"source":1,"target":6,"value":3.9268628766951896e-7},
+                {"source":3,"target":1,"value":0.010545642410650423},
+                {"source":15,"target":7,"value":3.9109262426109467e-13},
+                {"source":11,"target":15,"value":0.00004347178144494168},
+                {"source":17,"target":11,"value":2.0174854047454615e-7},
+                {"source":12,"target":17,"value":0.10131181067864767},
+                {"source":19,"target":12,"value":0.00011127158481999625},
+                {"source":13,"target":12,"value":0.00003490753487752978},
+                {"source":14,"target":19,"value":0.00003104042166837136},
+                {"source":10,"target":14,"value":0.040048668765867164},
+                {"source":18,"target":10,"value":0.0003374717145231001},
+                {"source":16,"target":19,"value":1.63140394842697e-9}
+            ],
+            [   {"source":2,"target":0,"value":0.1100663778177408},
+                {"source":6,"target":2,"value":0.5407520695995479},
+                {"source":5,"target":6,"value":0.12454668501839479},
+                {"source":1,"target":5,"value":0.278553299060448},
+                {"source":3,"target":1,"value":0.032620120837897594},
+                {"source":7,"target":3,"value":0.007849057375242434},
+                {"source":8,"target":7,"value":0.5357188828064023},
+                {"source":9,"target":8,"value":0.04475126236623514},
+                {"source":4,"target":0,"value":0.0006898170770591334},
+                {"source":15,"target":9,"value":3.323774168449029e-10},
+                {"source":11,"target":15,"value":0.0004470893834937476},
+                {"source":17,"target":11,"value":0.00048220710187248686},
+                {"source":12,"target":17,"value":0.28180407301893373},
+                {"source":13,"target":12,"value":0.39308745627929975},
+                {"source":19,"target":13,"value":0.0003633078743218367},
+                {"source":18,"target":19,"value":0.011172868283005927},
+                {"source":14,"target":18,"value":0.008066516848387783},
+                {"source":10,"target":14,"value":0.12751711338074698},
+                {"source":16,"target":10,"value":0.4962286356057282}
+            ]
+        ],
+        "merged":[
+            {"source":2,"target":0,"value":0.05113091367677204},
+            {"source":5,"target":2,"value":0.06731171556616558},
+            {"source":6,"target":2,"value":0.0002908327657925086},
+            {"source":4,"target":0,"value":0.00011852054609592316},
+            {"source":7,"target":5,"value":0.000009419952041882645},
+            {"source":8,"target":7,"value":0.029263595039587705},
+            {"source":9,"target":8,"value":0.01571542351842038},
+            {"source":1,"target":6,"value":3.9268628766951896e-7},
+            {"source":3,"target":1,"value":0.010545642410650423},
+            {"source":15,"target":7,"value":3.9109262426109467e-13},
+            {"source":11,"target":15,"value":0.00004347178144494168},
+            {"source":17,"target":11,"value":2.0174854047454615e-7},
+            {"source":12,"target":17,"value":0.10131181067864767},
+            {"source":19,"target":12,"value":0.00011127158481999625},
+            {"source":13,"target":12,"value":0.00003490753487752978},
+            {"source":14,"target":19,"value":0.00003104042166837136},
+            {"source":10,"target":14,"value":0.040048668765867164},
+            {"source":18,"target":10,"value":0.0003374717145231001},
+            {"source":16,"target":19,"value":1.63140394842697e-9},
+            {"source":5,"target":6,"value":0.12454668501839479},
+            {"source":1,"target":5,"value":0.278553299060448},
+            {"source":7,"target":3,"value":0.007849057375242434},
+            {"source":15,"target":9,"value":3.323774168449029e-10},
+            {"source":19,"target":13,"value":0.0003633078743218367},
+            {"source":18,"target":19,"value":0.011172868283005927},
+            {"source":14,"target":18,"value":0.008066516848387783},
+            {"source":16,"target":10,"value":0.4962286356057282}
+        ]
+    }
+}

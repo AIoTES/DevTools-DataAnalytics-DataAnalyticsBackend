@@ -1,0 +1,43 @@
+{
+    "inputSchema": {
+        "title": "Load data from URL service input",
+        "description": "The input to the load data from URL service.",
+        "type": "object",
+        "properties": {
+            "options": {
+                "type": "object",
+                "description": "Service options.",
+                "properties": {
+                    "url": {
+                        "type": "string",
+                        "description": "The URL of the data to load."
+                    },
+                    "format": {
+                        "type": "string",
+                        "description": "The format of the data to load (csv or json)."
+                    },
+                    "header": {
+                        "type": "boolean",
+                        "description": "Whether the data contain a header row (only for CSV data)."
+                    },
+                    "delimiter": {
+                        "type": "string",
+                        "description": "The column delimieter of the data (only for CSV data)."
+                    }
+                },
+                "required": ["url", "format"]
+            }
+        },
+        "required": ["options"]
+    },
+    "inputExample": {
+        "options": {
+            "url": "http://localhost:8081/sample_data/3dsc_aligned_137_dist.txt",
+            "format": "csv",
+            "header": false,
+            "delimiter": " "
+        }
+    },
+    "outputSchema": {},
+    "outputExample": []
+}

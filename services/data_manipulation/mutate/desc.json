@@ -1,0 +1,64 @@
+{
+    "inputSchema": {
+        "title": "Mutate service input",
+        "description": "The input to the mutate service.",
+        "type": "object",
+        "properties": {
+            "data": {
+                "type": "array",
+                "description": "The data to analyze, as an array of JSON objects.",
+                "items": {
+                    "type": "object",
+                    "description": "An input data record.",
+                    "properties": {}
+                }
+            },
+            "options": {
+                "type": "object",
+                "description": "Mutated variables. Option properties will be added as new data attributes.",
+                "properties": {},
+                "required": []
+            }
+        },
+        "required": ["data", "options"]
+    },
+    "inputExample": {
+        "data": [
+            {"id": "1", "label": "A"},
+            {"id": "2", "label": "A"},
+            {"id": "3", "label": "B"},
+            {"id": "4", "label": "A"},
+            {"id": "5", "label": "C"},
+            {"id": "6", "label": "C"},
+            {"id": "7", "label": "D"},
+            {"id": "8", "label": "B"},
+            {"id": "9", "label": "A"},
+            {"id": "10", "label": "C"}
+        ],
+        "options": {
+            "index": "$rowidx"
+        }
+    },
+    "outputSchema": {
+        "title": "Mutate output",
+        "description": "The output of the mutate service.",
+        "type": "array",
+        "items": {
+            "type": "object",
+            "description": "An output data record.",
+            "properties": {}
+        }
+    },
+    "outputExample": [
+        {"id": "1", "label": "A", "index": 0},
+        {"id": "2", "label": "A", "index": 1},
+        {"id": "3", "label": "B", "index": 2},
+        {"id": "4", "label": "A", "index": 3},
+        {"id": "5", "label": "C", "index": 4},
+        {"id": "6", "label": "C", "index": 5},
+        {"id": "7", "label": "D", "index": 6},
+        {"id": "8", "label": "B", "index": 7},
+        {"id": "9", "label": "A", "index": 8},
+        {"id": "10", "label": "C", "index": 9}
+    ]
+}

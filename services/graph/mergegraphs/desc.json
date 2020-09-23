@@ -1,0 +1,113 @@
+{
+    "inputSchema": {
+        "title": "Merge graphs service input",
+        "description": "The input to the merge graphcs service.",
+        "type": "object",
+        "properties": {
+            "data": {
+                "type": "array",
+                "description": "The input sets of graph edges matrix.",
+                "items": {
+                    "type": "array",
+                    "description": "The edges of a graph.",
+                    "items": {
+                        "type": "object",
+                        "description": "An edge of the graph.",
+                        "properties": {
+                            "source": {
+                                "type": "integer",
+                                "description": "The index of the source node"
+                            },
+                            "target": {
+                                "type": "integer",
+                                "description": "The index of the target node"
+                            }
+                        },
+                        "required": ["source", "target"]
+                    }
+                }
+            },
+            "options": {
+                "type": "object",
+                "description": "Service options.",
+                "properties": {
+                },
+                "required": []
+            }
+        },
+        "required": ["data", "options"]
+    },
+    "inputExample": {
+        "data": [
+            [
+                {"source": 2, "target": 0},
+                {"source": 5, "target": 2},
+                {"source": 6, "target": 2},
+                {"source": 4, "target": 0},
+                {"source": 7, "target": 5},
+                {"source": 8, "target": 7},
+                {"source": 9, "target": 8},
+                {"source": 1, "target": 6},
+                {"source": 3, "target": 1},
+                {"source": 15, "target": 7},
+                {"source": 11, "target": 15}
+            ],
+            [
+                {"source": 2, "target": 0},
+                {"source": 2, "target": 5},
+                {"source": 6, "target": 2},
+                {"source": 4, "target": 0},
+                {"source": 17, "target": 11},
+                {"source": 12, "target": 17},
+                {"source": 19, "target": 12},
+                {"source": 13, "target": 12},
+                {"source": 14, "target": 19},
+                {"source": 10, "target": 14},
+                {"source": 18, "target": 10},
+                {"source": 16, "target": 19}
+            ]
+        ],
+        "options": {}
+    },
+    "outputSchema": {
+        "title": "Merge graphs service output",
+        "description": "The output of the merge graphs service.",
+        "type": "array",
+        "items": {
+            "type": "object",
+            "description": "An edge of the graph.",
+            "properties": {
+                "source": {
+                    "type": "integer",
+                    "description": "The index of the source node"
+                },
+                "target": {
+                    "type": "integer",
+                    "description": "The index of the target node"
+                }
+            },
+            "required": ["source", "target"]
+        }
+    },
+    "outputExample": [
+        {"source": 2, "target": 0},
+        {"source": 5, "target": 2},
+        {"source": 6, "target": 2},
+        {"source": 4, "target": 0},
+        {"source": 7, "target": 5},
+        {"source": 8, "target": 7},
+        {"source": 9, "target": 8},
+        {"source": 1, "target": 6},
+        {"source": 3, "target": 1},
+        {"source": 15, "target": 7},
+        {"source": 11, "target": 15},
+        {"source": 17, "target": 11},
+        {"source": 12, "target": 17},
+        {"source": 19, "target": 12},
+        {"source": 13, "target": 12},
+        {"source": 14, "target": 19},
+        {"source": 10, "target": 14},
+        {"source": 18, "target": 10},
+        {"source": 16, "target": 19}
+    ]
+}

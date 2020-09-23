@@ -1,0 +1,178 @@
+{
+    "inputSchema": {
+        "type": "object",
+        "properties": {
+            "data": {
+                "type": "array"
+            },
+            "options": {
+                "type": "object",
+                "properties": {
+                    "attribute": {
+                        "type": "string",
+                        "description": "The name of the attribute to predict.",
+                        "required": [
+                            "attribute"
+                        ]
+                    },                    
+                    "steps": {
+                        "type": "integer",
+                        "description": "Number of steps forecast",
+                        "required": [
+                            "steps"
+                        ]
+                    },
+                    "modelParameters": {
+                        "type": "object",
+                        "properties": {
+                            "arparams": {
+                                "type": "array",
+                                "description": "The parameters associated with the AR coefficients in the model."
+                            },
+                            "maparams": {
+                                "type": "array",
+                                "description": "The value of the moving average coefficients."
+                            },
+                            "method": {
+                                "type": "string",
+                                "description": "Method that estimated model coefficients."
+                            },
+                            "k_diff": {
+                                "type": "integer"
+                            },
+                            "sigma2": {
+                                "type": "number",
+                                "description": "The variance of the residuals."
+                            },
+                            "alpha": {
+                                "type": "number"
+                            }
+                        },
+                        "required": [
+                            "arparams",
+                            "maparams",
+                            "sigma2",
+                            "alpha"
+                        ]
+                    }
+                }
+            }
+        },
+        "required": [
+            "data",
+            "options"
+        ]
+    },
+    "inputExample": {
+        "data": [            
+            {"month": "1-01", "sales": 266.0},
+            {"month": "1-02", "sales": 145.9},
+            {"month": "1-03", "sales": 183.1},
+            {"month": "1-04", "sales": 119.3},
+            {"month": "1-05", "sales": 180.3},
+            {"month": "1-06", "sales": 168.5},
+            {"month": "1-07", "sales": 231.8},
+            {"month": "1-08", "sales": 224.5},
+            {"month": "1-09", "sales": 192.8},
+            {"month": "1-10", "sales": 122.9},
+            {"month": "1-11", "sales": 336.5},
+            {"month": "1-12", "sales": 185.9},
+            {"month": "2-01", "sales": 194.3},
+            {"month": "2-02", "sales": 149.5},
+            {"month": "2-03", "sales": 210.1},
+            {"month": "2-04", "sales": 273.3},
+            {"month": "2-05", "sales": 191.4},
+            {"month": "2-06", "sales": 287.0},
+            {"month": "2-07", "sales": 226.0},
+            {"month": "2-08", "sales": 303.6},
+            {"month": "2-09", "sales": 289.9},
+            {"month": "2-10", "sales": 421.6},
+            {"month": "2-11", "sales": 264.5},
+            {"month": "2-12", "sales": 342.3},
+            {"month": "3-01", "sales": 339.7},
+            {"month": "3-02", "sales": 440.4},
+            {"month": "3-03", "sales": 315.9},
+            {"month": "3-04", "sales": 439.3},
+            {"month": "3-05", "sales": 401.3},
+            {"month": "3-06", "sales": 437.4},
+            {"month": "3-07", "sales": 575.5},
+            {"month": "3-08", "sales": 407.6},
+            {"month": "3-09", "sales": 682.0}
+        ],
+        "options": {
+            "attribute": "sales",
+            "steps": 3,
+            "modelParameters": {
+                "arparams": [
+                    0.08427221489976593,
+                    0.6566409085813207,
+                    0.2505061980154966,
+                    -0.04058586254655768,
+                    0.009745256058845958
+                ],
+                "maparams": [],
+                "k_diff": 0,
+                "sigma2": 5274.86186005968,
+                "method": "css-mle",
+                "alpha": 0.05
+            }
+        }
+    },
+    "outputSchema": {
+        "type": "object",
+        "properties": {
+            "forecast": {
+                "type": "array",
+                "description": "Predicted timeseries",
+                "contains": {
+                    "type": "number"
+                }
+            },
+            "stderr": {
+                "type": "array",
+                "description": "Standard deviation error",
+                "contains": {
+                    "type": "number"
+                }
+            },
+            "conf_int": {
+                "type": "array",
+                "description": "Confidence interval of each forecast",
+                "contains": {
+                    "type": "number"
+                }
+            }
+        },
+        "required": [
+            "forecast",
+            "stderr",
+            "conf_int"
+        ]
+    },
+    "outputExample": {
+        "forecast": [
+            493.6213216430063,
+            468.51185781837677,
+            596.2346672162296
+        ],
+        "stderr": [
+            72.62824423087537,
+            72.88568382572319,
+            87.38527601022432
+        ],
+        "conf_int": [
+            [
+                351.27257869011163,
+                635.970064595901
+            ],
+            [
+                325.65854253138576,
+                611.3651731053678
+            ],
+            [
+                424.96267345709794,
+                767.5066609753612
+            ]
+        ]
+    }
+}
