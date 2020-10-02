@@ -25,7 +25,7 @@ To run the server, run the following command from within the same directory:
 node server.js
 ```
 
-## Using Docker
+### Using Docker
 The Data Analytics Server can also be deployed using its AIoTES docker image. In order to run the application use the following command:
 
 ```
