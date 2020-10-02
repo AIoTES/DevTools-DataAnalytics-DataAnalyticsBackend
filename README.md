@@ -340,7 +340,7 @@ To build a new Docker image from the Data Analytics Server source code, you can 
 3. Run: `docker build -t data-analytics-server:2.0 .`
 4. Run: `docker images` to find the id of the images.
 5. Run: `docker run -p 8081:8081 <IMAGE_ID>`
-6. Make your POST requests to the following URL: http://localhost:8081/<service_name>
+6. Make your POST requests to the following URL: http://localhost:8081/service_name
 
 To push the image to the ACTIVAGE repository run the following commands.
 
