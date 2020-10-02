@@ -25,6 +25,17 @@ To run the server, run the following command from within the same directory:
 node server.js
 ```
 
+## Using Docker
+The Data Analytics Server can also be deployed using its AIoTES docker image. In order to run the application use the following command:
+
+```
+docker run -it -p 8081:8081 --name data-analysis-api docker-activage.satrd.es/data-analytics-server:0.2.2
+```
+
+It will pull the corresponding image and run it. The application will be available on port 8081. If you want to change this, please change the "*-p 8081:8081*" of the aforementioned command. Make sure that you have first logged in to the AIoTES private Docker registry.
+
+For instructions on how to build a new docker image, check [Building a new Docker image](#building-a-new-docker-image) section bellow.
+
 ## Usage
 
 After you start the server, it is available at the following URL:
@@ -318,6 +329,26 @@ python <path_to_python_script> <input_file_name> <output_file_name> <options[0]>
 The `<input_file_name>` and `<output_file_name>` arguments are the names of temporary files which are automatically created to pass data to and from the Python script. These temporary files are stored temporarily in the `tmp` directory.
 
 See `services/clustering/kmeans` for an example of a service calling a Python script.
+
+
+## Building a new Docker image
+
+To build a new Docker image from the Data Analytics Server source code, you can do the following.
+
+1. Download the source code.
+2. Open docker console and move in the source code's home directory (the one that contains the `Dockerfile`).
+3. Run: `docker build -t data-analytics-server:2.0 .`
+4. Run: `docker images` to find the id of the images.
+5. Run: `docker run -p 8081:8081 <IMAGE_ID>`
+6. Make your POST requests to the following URL: http://localhost:8081/<service_name>
+
+To push the image to the ACTIVAGE repository run the following commands.
+
+```
+docker login docker-activage.satrd.es
+docker tag <IMAGE_ID> docker-activage.satrd.es/data-analytics-server:0.2.1
+docker push docker-activage.satrd.es/data-analytics-server:0.2.1
+```
 
 ## License
 
